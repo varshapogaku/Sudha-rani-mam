@@ -1,0 +1,328 @@
+           ASSIGNMENT-02 LAB
+
+Name: P.Varsha
+Batch:29
+Date:15-01-2025
+
+
+
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": 18,
+      "metadata": {
+        "id": "FdS5UOoX6pMp"
+      },
+      "outputs": [],
+      "source": [
+        "import nltk\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "from nltk.stem import PorterStemmer, SnowballStemmer\n",
+        "from nltk.stem import WordNetLemmatizer"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "nltk.download('punkt')\n",
+        "nltk.download('wordnet')\n",
+        "nltk.download('omw-1.4')\n",
+        "nltk.download('punkt_tab')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8WcqULlL6utc",
+        "outputId": "610fa4c8-5465-4054-cfb0-ae3195696ce4"
+      },
+      "execution_count": 19,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package punkt to /root/nltk_data...\n",
+            "[nltk_data]   Package punkt is already up-to-date!\n",
+            "[nltk_data] Downloading package wordnet to /root/nltk_data...\n",
+            "[nltk_data]   Package wordnet is already up-to-date!\n",
+            "[nltk_data] Downloading package omw-1.4 to /root/nltk_data...\n",
+            "[nltk_data]   Package omw-1.4 is already up-to-date!\n",
+            "[nltk_data] Downloading package punkt_tab to /root/nltk_data...\n",
+            "[nltk_data]   Package punkt_tab is already up-to-date!\n"
+          ]
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "True"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 19
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "text = \"Jumping players were running swiftly in the fields.\""
+      ],
+      "metadata": {
+        "id": "F5xiOH_v6yNQ"
+      },
+      "execution_count": 20,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**Tokenization**"
+      ],
+      "metadata": {
+        "id": "QVxzNRgs635L"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "tokens = word_tokenize(text)\n",
+        "print(\"Tokenized Words:\")\n",
+        "print(tokens)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "W75j2mB160rP",
+        "outputId": "7c346f51-3bfa-45c4-ee83-f73d9a978a54"
+      },
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Tokenized Words:\n",
+            "['Jumping', 'players', 'were', 'running', 'swiftly', 'in', 'the', 'fields', '.']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**Stemming using Porter Stemmer**"
+      ],
+      "metadata": {
+        "id": "co_8-43D6-TB"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "porter_stemmer = PorterStemmer()\n",
+        "porter_stems = [porter_stemmer.stem(word) for word in tokens]\n",
+        "print(\"\\nStemming using Porter Stemmer:\")\n",
+        "print(porter_stems)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "MGLI9Qly7D_k",
+        "outputId": "e1425e6c-3dc1-4a3e-9dce-ad855641ba7c"
+      },
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Stemming using Porter Stemmer:\n",
+            "['jump', 'player', 'were', 'run', 'swiftli', 'in', 'the', 'field', '.']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**Stemming using Snowball Stemmer**"
+      ],
+      "metadata": {
+        "id": "BI2_n3lp7Kot"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "snowball_stemmer = SnowballStemmer(\"english\")\n",
+        "snowball_stems = [snowball_stemmer.stem(word) for word in tokens]\n",
+        "print(\"\\nStemming using Snowball Stemmer:\")\n",
+        "print(snowball_stems)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "jYCh8f7h7Hr3",
+        "outputId": "8db46fbc-5f74-46e4-bfd6-2cfd4a98cba7"
+      },
+      "execution_count": 23,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Stemming using Snowball Stemmer:\n",
+            "['jump', 'player', 'were', 'run', 'swift', 'in', 'the', 'field', '.']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**Lemmatization** **using** **WordNetLemmatizer** **bold text**"
+      ],
+      "metadata": {
+        "id": "vtn4aDP37QGQ"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "lemmatizer = WordNetLemmatizer()\n",
+        "lemmatized_words = [lemmatizer.lemmatize(word) for word in tokens]\n",
+        "print(\"\\nLemmatization using WordNetLemmatizer:\")\n",
+        "print(lemmatized_words)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fg2um7bD7TmL",
+        "outputId": "1f72ad01-7eab-4473-eee9-62649401310f"
+      },
+      "execution_count": 24,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Lemmatization using WordNetLemmatizer:\n",
+            "['Jumping', 'player', 'were', 'running', 'swiftly', 'in', 'the', 'field', '.']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "words = nltk.word_tokenize(text)\n",
+        "lemmatizer = WordNetLemmatizer()"
+      ],
+      "metadata": {
+        "id": "tfYGtjBY9frK"
+      },
+      "execution_count": 14,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        " suffixes to remove"
+      ],
+      "metadata": {
+        "id": "BB6_lRVi-lks"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "suffixes = [\"ing\", \"ed\", \"ly\", \"es\", \"s\"]"
+      ],
+      "metadata": {
+        "id": "ANesEkKs9k8r"
+      },
+      "execution_count": 25,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Words with meaningful root words after removing suffixes:\\n\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "XOlHVm0s9n-Y",
+        "outputId": "49bb7713-c028-4b9a-bbc3-84363140b017"
+      },
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Words with meaningful root words after removing suffixes:\n",
+            "\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "for word in words:\n",
+        "    for suffix in suffixes:\n",
+        "        if word.endswith(suffix):\n",
+        "            root_word = word[: -len(suffix)]\n",
+        "            from nltk.corpus import wordnet\n",
+        "            if wordnet.synsets(root_word):\n",
+        "                print(f\"Original Word: {word}, Root Word: {root_word}\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "IhZA6roO9qyn",
+        "outputId": "68e06252-e0a3-42d7-aae5-386c1b438818"
+      },
+      "execution_count": 28,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Original Word: Jumping, Root Word: Jump\n",
+            "Original Word: players, Root Word: player\n",
+            "Original Word: swiftly, Root Word: swift\n",
+            "Original Word: fields, Root Word: field\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
